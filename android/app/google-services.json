@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "375390658348",
+    "project_id": "sini-nonton-b8ea9",
+    "storage_bucket": "sini-nonton-b8ea9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375390658348:android:e2c6c93ba51bf7f8c29689",
+        "android_client_info": {
+          "package_name": "com.sininonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375390658348-vtbltmfdldmiiojq8pmod9i6qk317ulo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2qjULw5Z-cY6nZwGeOQPcqyznIyF0X2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375390658348-vtbltmfdldmiiojq8pmod9i6qk317ulo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
