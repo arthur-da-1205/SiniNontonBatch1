@@ -17,7 +17,7 @@ import Header from './components/Header';
 import {Space} from '../../../../components';
 import api from '../../../../../helpers';
 import CastSection from './components/CastSection';
-// import VideosSection from './components/VideosSection';
+import VideoSection from './components/VideoSection';
 
 const MovieDetailScreen = ({route}) => {
   const id = route.params.id;
@@ -95,8 +95,14 @@ const MovieDetailScreen = ({route}) => {
             <Text
               style={{...uiStyle.textSemiBold, fontSize: 18}}
               numberOfLines={1}>
-              {detail?.original_title}
+              {detail?.title}
             </Text>
+            {/* <Text
+              style={{...uiStyle.textSemiBold, fontSize: 18}}
+              numberOfLines={2}>
+              Original Title:
+              {detail?.original_title}
+            </Text> */}
             <Space height={uiDimen.sm} />
             <View style={styles.metaRating}>
               <IconM name="star" color={uiColor.star} size={20} />
@@ -130,7 +136,7 @@ const MovieDetailScreen = ({route}) => {
           </View>
           <Space height={uiDimen.lg} />
 
-          {/* <VideosSection videos={videos} playVideo={playVideo} /> */}
+          <VideoSection />
           <Space height={uiDimen.lg} />
 
           <CastSection data={credits.cast} />
