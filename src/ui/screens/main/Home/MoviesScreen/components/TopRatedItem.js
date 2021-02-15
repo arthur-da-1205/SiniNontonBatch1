@@ -6,10 +6,15 @@ import {TMDB_IMG_URL} from '@env';
 
 import {Space} from '../../../../../components';
 import {uiColor, uiDimen, uiStyle} from '../../../../../constants';
+import {withNavigation} from '@react-navigation/compat';
 
-const TopRatedItem = ({data}) => {
+const TopRatedItem = ({data, navigation}) => {
   return (
-    <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('MovieDetail', {id: data.id});
+      }}
+      style={styles.imageContainer}>
       <Image
         source={{uri: `${TMDB_IMG_URL}${data.poster_path}`}}
         style={styles.image}
@@ -54,4 +59,4 @@ TopRatedItem.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default TopRatedItem;
+export default withNavigation(TopRatedItem);

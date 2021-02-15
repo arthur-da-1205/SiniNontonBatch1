@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import MovieDetailScreen from '../ui/screens/main/global/MovieDetailScreen';
 import BottomTab from './HomeBottomTab';
+import {ActivityIndicator} from 'react-native';
+import {uiDimen} from '../ui/constants';
 
 const Stack = createStackNavigator();
 
