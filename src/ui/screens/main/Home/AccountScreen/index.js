@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import {UserContext} from '../../../../../commons/contexts/user';
 import {Button} from '../../../../components';
 import auth from '@react-native-firebase/auth';
@@ -14,7 +14,9 @@ const AccountScreen = () => {
   return (
     <SafeAreaView>
       <Text>Halo {user?.displayName}</Text>
-      <Button title="Sign Out" onPress={handleSignOut} />
+      <View style={{bottom: 0}}>
+        <Button title="Sign Out" onPress={handleSignOut} />
+      </View>
     </SafeAreaView>
   );
 };

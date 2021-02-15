@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
@@ -20,7 +20,7 @@ const AppContainer = () => {
   useEffect(() => {
     const listener = auth().onAuthStateChanged(handleAuthChanged);
 
-    return listener; //for unmounting
+    return listener; //unmounting
   });
 
   return (

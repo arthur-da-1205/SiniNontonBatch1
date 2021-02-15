@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {uiColor, uiDimen, uiStyle} from '../constants';
+import {uiDimen, uiStyle, uiColor} from '../constants';
 
 const Button = ({title, onPress, outlined = false}) => {
   return (

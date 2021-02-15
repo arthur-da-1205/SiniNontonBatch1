@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-import {uiDimen, uiStyle} from '../../../../../constants';
 import {Space} from '../../../../../components';
+import {uiDimen, uiStyle} from '../../../../../constants';
 import PopularItem from './PopularItem';
 
 const PopularSection = ({data}) => {
@@ -18,12 +18,12 @@ const PopularSection = ({data}) => {
       <View style={styles.headingContainer}>
         <Text style={styles.headingTitle}>Popular</Text>
         <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.headingLinkText}>View all</Text>
+          <Text style={styles.headingLinkText}>View All</Text>
         </TouchableOpacity>
       </View>
-      <Space height={uiDimen.md} />
+      <Space height={uiDimen.sm}></Space>
 
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <Space width={uiDimen.md} />
         {data.map((item, index) => {
           return <PopularItem key={index} data={item} />;
@@ -33,6 +33,7 @@ const PopularSection = ({data}) => {
     </>
   );
 };
+
 const styles = StyleSheet.create({
   headingContainer: {
     flexDirection: 'row',
@@ -40,8 +41,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  headingTitle: {...uiStyle.textSemiBold, fontSize: 16},
-  headingLinkText: {...uiStyle.textRegular, fontSize: 12},
+  headingTitle: {
+    ...uiStyle.textSemiBold,
+    fontSize: 16,
+  },
+  headingLinkText: {
+    ...uiStyle.textRegular,
+    fontSize: 12,
+  },
 });
 
 PopularSection.propTypes = {

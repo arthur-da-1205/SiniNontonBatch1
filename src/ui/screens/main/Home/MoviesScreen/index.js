@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import IconM from 'react-native-vector-icons/MaterialIcons';
 import auth from '@react-native-firebase/auth';
 import {TMDB_API_KEY} from '@env';
 
 import {Input, Space} from '../../../../components';
-import {uiDimen, uiStyle} from '../../../../constants';
+import {uiColor, uiDimen, uiStyle} from '../../../../constants';
 import PopularSection from './components/PopularSection';
 import TopRatedSection from './components/TopRatedSection';
 import WhatsNewSection from './components/WhatsNewSection';
@@ -67,6 +68,9 @@ const MoviesScreen = () => {
         <Input
           fullCircle
           placeholder="Search ..."
+          placeholderLefIcon={
+            <IconM name="search" color={uiColor.placeholder} size={16} />
+          }
           value=""
           onChange={() => {}}
         />

@@ -1,20 +1,18 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import IconMC from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconM from 'react-native-vector-icons/MaterialIcons';
-
-import {uiColor, uiDimen, uiStyle} from '../ui/constants';
-import {Space} from '../ui/components';
+import IconMC from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import MoviesScreen from '../ui/screens/main/Home/MoviesScreen';
 import TvShowsScreen from '../ui/screens/main/Home/TvShowsScreen';
 import FavouritesScreen from '../ui/screens/main/Home/FavouritesScreen';
 import AccountScreen from '../ui/screens/main/Home/AccountScreen';
+import {uiColor, uiDimen, uiStyle} from '../ui/constants';
 
 const Tab = createBottomTabNavigator();
 
-const BootmIcon = ({family, name, color}) => {
+const BottomIcon = ({family, name, color}) => {
   if (family === 'material-community') {
     return <IconMC name={name} color={color} size={24} />;
   } else if (family === 'material') {
@@ -22,7 +20,7 @@ const BootmIcon = ({family, name, color}) => {
   }
 };
 
-const MyTabBar = ({state, descriptors, navigation}) => {
+function MyTabBar({state, descriptors, navigation}) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
   if (focusedOptions.tabBarVisible === false) {
@@ -32,30 +30,40 @@ const MyTabBar = ({state, descriptors, navigation}) => {
   const routeNames = [
     {
       title: 'Movies',
-      icon: {family: 'material', name: 'local-movies'},
+      icon: {
+        family: 'material',
+        name: 'local-movies',
+      },
     },
     {
-      title: 'Tv Shows',
-      icon: {family: 'material', name: 'tv'},
+      title: 'TV Shows',
+      icon: {
+        family: 'material',
+        name: 'tv',
+      },
     },
     {
       title: 'Favourites',
-      icon: {family: 'material-community', name: 'heart-outline'},
+      icon: {
+        family: 'material-community',
+        name: 'heart-outline',
+      },
     },
     {
       title: 'Account',
-      icon: {family: 'material-community', name: 'account-circle-outline'},
+      icon: {
+        family: 'material-community',
+        name: 'account-circle-outline',
+      },
     },
   ];
 
   return (
     <View
       style={{
-        backgroundColor: uiColor.bgBottomTab,
         flexDirection: 'row',
+        backgroundColor: uiColor.bgBottomTab,
         paddingVertical: uiDimen.md,
-        alignItems: 'center',
-        // justifyContent: 'space-around',
       }}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
@@ -96,17 +104,17 @@ const MyTabBar = ({state, descriptors, navigation}) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{
-              flex: 1,
-              alignItems: 'center',
-            }}>
-            {routeNames[index].icon}
-            <Space height={uiDimen.sm} />
+            style={{flex: 1, alignItems: 'center'}}>
+            <BottomIcon
+              family={routeNames[index].icon.family}
+              name={routeNames[index].icon.name}
+              color={isFocused ? uiColor.primary : uiColor.accent1}
+            />
             <Text
               style={{
                 ...uiStyle.textSemiBold,
                 fontSize: 12,
-                color: isFocused ? uiColor.primary : 'white',
+                color: isFocused ? uiColor.primary : uiColor.accent1,
               }}>
               {routeNames[index].title}
             </Text>
@@ -115,7 +123,7 @@ const MyTabBar = ({state, descriptors, navigation}) => {
       })}
     </View>
   );
-};
+}
 
 const HomeBottomTab = () => {
   return (

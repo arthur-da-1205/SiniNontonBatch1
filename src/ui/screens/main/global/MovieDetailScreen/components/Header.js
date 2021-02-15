@@ -1,12 +1,14 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-
+import {Image, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMC from 'react-native-vector-icons/MaterialCommunityIcons';
+import {withNavigation} from '@react-navigation/compat';
+import PropTypes from 'prop-types';
+import {TMDB_IMG_URL} from '@env';
 
 import {uiColor, uiDimen, uiStyle} from '../../../../../constants';
 
-const Header = () => {
+const Header = ({navigation, posterPath}) => {
   return (
     <View
       style={{
@@ -23,7 +25,6 @@ const Header = () => {
           width: '100%',
           padding: uiDimen.md,
           flexDirection: 'row',
-          // backgroundColor: 'yellow',
           justifyContent: 'space-between',
           zIndex: 100,
         }}>
@@ -40,7 +41,7 @@ const Header = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Icon name="arrow-back" size={24} color="white" />
+          <Icon name="arrow-back" size={24} color="white"></Icon>
         </TouchableOpacity>
         <View
           style={{
@@ -52,7 +53,7 @@ const Header = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <IconMC name="heart-outline" size={24} color="white" />
+          <IconMC name="heart-outline" size={24} color="white"></IconMC>
         </View>
       </View>
       <View
@@ -65,8 +66,23 @@ const Header = () => {
           zIndex: 50,
         }}
       />
+      {posterPath && (
+        <Image
+          source={{uri: `${TMDB_IMG_URL}${posterPath}`}}
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: uiColor.accent1,
+            opacity: 0.8,
+          }}
+          resizeMode="cover"
+        />
+      )}
     </View>
   );
 };
+Header.propTypes = {
+  posterPath: PropTypes.string,
+};
 
-export default Header;
+export default withNavigation(Header);
