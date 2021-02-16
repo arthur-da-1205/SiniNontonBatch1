@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Image,
   SafeAreaView,
   ScrollView,
@@ -25,12 +26,14 @@ const MoviesScreen = () => {
   const [popularData, setPopularData] = useState([]);
   const [topRatedData, setTopRatedData] = useState([]);
   const [whatsNewData, setWhatNewsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     api
       .get(`/movie/popular?api_key=${TMDB_API_KEY}`)
       .then((res) => {
         setPopularData(res.data.results);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -39,6 +42,7 @@ const MoviesScreen = () => {
       .get(`/movie/top_rated?api_key=${TMDB_API_KEY}`)
       .then((res) => {
         setTopRatedData(res.data.results);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -47,11 +51,28 @@ const MoviesScreen = () => {
       .get(`/movie/upcoming?api_key=${TMDB_API_KEY}`)
       .then((res) => {
         setWhatNewsData(res.data.results);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
+
+  if (isLoading) {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          opcity: 0.8,
+          backgroundColor: uiColor.accent1,
+        }}>
+        <ActivityIndicator size="large" color="red" />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={uiStyle.baseContainer}>
       <Space height={uiDimen.md} />
