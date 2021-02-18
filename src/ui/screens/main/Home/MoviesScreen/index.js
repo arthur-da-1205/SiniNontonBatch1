@@ -33,7 +33,7 @@ const MoviesScreen = () => {
       .get(`/movie/popular?api_key=${TMDB_API_KEY}`)
       .then((res) => {
         setPopularData(res.data.results);
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -42,7 +42,7 @@ const MoviesScreen = () => {
       .get(`/movie/top_rated?api_key=${TMDB_API_KEY}`)
       .then((res) => {
         setTopRatedData(res.data.results);
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
