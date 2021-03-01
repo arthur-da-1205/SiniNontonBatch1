@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -73,11 +73,15 @@ const FavouritesScreen = () => {
     //   <Tab.Screen name="Movies" component={FavouriteMovies} />
     //   <Tab.Screen name="TVShows" component={FavouriteTVShows} />
     // </Tab.Navigator>
-
-    <Tab.Navigator>
-      <Tab.Screen name="Movies" component={FavoriteMovies} />
-      <Tab.Screen name="TvShows" component={FavouriteTVShows} />
-    </Tab.Navigator>
+    <>
+      <SafeAreaView>
+        <Text>Favourites</Text>
+      </SafeAreaView>
+      <Tab.Navigator>
+        <Tab.Screen name="Movies" component={FavoriteMovies} />
+        <Tab.Screen name="TvShows" component={FavouriteTVShows} />
+      </Tab.Navigator>
+    </>
   );
 };
 

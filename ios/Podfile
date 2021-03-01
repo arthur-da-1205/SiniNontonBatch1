@@ -8,6 +8,7 @@ target 'SiniNonton' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+
   target 'SiniNontonTests' do
     inherit! :complete
     # Pods for testing

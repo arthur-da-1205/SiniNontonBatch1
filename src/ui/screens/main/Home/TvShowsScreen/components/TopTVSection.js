@@ -8,31 +8,39 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-import {Space} from '../../../../../components';
 import {uiDimen, uiStyle} from '../../../../../constants';
-import PopularTVItem from './PopularTVItem';
+import {Space} from '../../../../../components';
+import TopTVItem from './TopTVItem';
+// import TopRatedSection from '../../MoviesScreen/components/TopRatedSection';
 
-const PopularTVSection = ({data}) => {
+const TopTVSection = ({data}) => {
   return (
     <>
       <View style={styles.headingContainer}>
-        <Text style={styles.headingTitle}>Popular</Text>
+        <Text style={styles.headingTitle}>Top Rated</Text>
         <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.headingLinkText}>View All</Text>
+          <Text style={styles.headingLinkText}>View all</Text>
         </TouchableOpacity>
       </View>
-      <Space height={uiDimen.sm}></Space>
+      <Space height={uiDimen.md} />
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal>
         <Space width={uiDimen.md} />
         {data.map((item, index) => {
-          return <PopularTVItem key={index} data={item} />;
+          return <TopTVItem key={index} data={item} />;
         })}
         <Space width={uiDimen.md} />
       </ScrollView>
     </>
   );
 };
+
+export default TopTVSection;
+
+TopTVItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   headingContainer: {
     flexDirection: 'row',
@@ -40,18 +48,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  headingTitle: {
-    ...uiStyle.textSemiBold,
-    fontSize: 16,
-  },
-  headingLinkText: {
-    ...uiStyle.textRegular,
-    fontSize: 12,
-  },
+  headingTitle: {...uiStyle.textSemiBold, fontSize: 16},
+  headingLinkText: {...uiStyle.textRegular, fontSize: 12},
 });
-
-PopularTVSection.propTypes = {
-  data: PropTypes.array.isRequired,
-};
-
-export default PopularTVSection;

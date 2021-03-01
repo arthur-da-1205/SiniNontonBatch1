@@ -1,12 +1,138 @@
-import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import IconM from 'react-native-vector-icons/MaterialIcons';
+import auth from '@react-native-firebase/auth';
+import {TMDB_API_KEY} from '@env';
+
+import {Input, Space} from '../../../../components';
+import {uiColor, uiDimen, uiStyle} from '../../../../constants';
+import PopularTVSection from './components/PopularTVSection';
+import TopTVSection from './components/TopTVSection';
+// import WhatsNewSection from './components/WhatsNewSection';
+import {UserContext} from '../../../../../commons/contexts/user';
+import api from '../../../../../helpers';
 
 const TvShowsScreen = () => {
+  const {user} = useContext(UserContext);
+  const [popularTv, setPopularTv] = useState([]);
+  const [topRatedTv, setTopRatedTv] = useState([]);
+  const [whatsNewTv, setWhatNewsTv] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    api
+      .get(`/tv/popular?api_key=${TMDB_API_KEY}`)
+      .then((res) => {
+        setPopularTv(res.data.results);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    api
+      .get(`/tv/top_rated?api_key=${TMDB_API_KEY}`)
+      .then((res) => {
+        setTopRatedTv(res.data.results);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    // api
+    //   .get(`/tv/upcoming?api_key=${TMDB_API_KEY}`)
+    //   .then((res) => {
+    //     setWhatNewsTv(res.data.results);
+    //     //setIsLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
+  }, []);
+
+  if (isLoading) {
     return (
-        <SafeAreaView>
-            <Text>TvShowsScreen</Text>
-        </SafeAreaView>
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          opcity: 0.8,
+          backgroundColor: uiColor.accent1,
+        }}>
+        <ActivityIndicator size="large" color="red" />
+      </View>
     );
+  }
+
+  return (
+    <SafeAreaView style={uiStyle.baseContainer}>
+      <Space height={uiDimen.md} />
+      <View style={styles.logoContainer}>
+        <Image
+          source={require('../../../../../assets/images/logo-128.png')}
+          style={styles.logoImage}
+        />
+        <Text style={styles.logoText}>SINI NONTON</Text>
+      </View>
+      <Space height={uiDimen.md} />
+
+      <View style={{marginHorizontal: uiDimen.lg}}>
+        <Input
+          fullCircle
+          placeholder="Search ..."
+          placeholderLefIcon={
+            <IconM name="search" color={uiColor.placeholder} size={16} />
+          }
+          value=""
+          onChange={() => {}}
+        />
+      </View>
+      <Space height={uiDimen.lg} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.headingText}>TV Shows</Text>
+        <Space height={uiDimen.md} />
+
+        <PopularTVSection data={popularTv} />
+        <Space height={uiDimen.lg} />
+
+        <TopTVSection data={topRatedTv} />
+        <Space height={uiDimen.md} />
+
+        {/* <Text style={{marginLeft: uiDimen.lg, fontSize: 16}}>What's New</Text>
+        <Space height={uiDimen.xl + 3} />
+
+        <WhatsNewSection data={whatsNewData} /> */}
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
+
+const styles = StyleSheet.create({
+  logoContainer: {
+    flexDirection: 'row',
+    marginHorizontal: uiDimen.lg,
+    alignItems: 'center',
+  },
+  logoImage: {width: 40, height: 40},
+  logoText: {...uiStyle.textBold, fontSize: 18},
+  headingText: {...uiStyle.textBold, fontSize: 20, textAlign: 'center'},
+});
+
+// const TvShowsScreen = () => {
+//   return (
+//     <View>
+//       <Text>A</Text>
+//     </View>
+//   );
+// };
 
 export default TvShowsScreen;
